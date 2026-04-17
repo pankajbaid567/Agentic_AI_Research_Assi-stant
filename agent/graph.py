@@ -7,11 +7,11 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 from langgraph.graph import StateGraph, START, END
 from agent_state import AgentState, create_initial_state
 
-# Assume these are built and exist in nodes package
-from nodes.search import search_node
-from nodes.summarize import summarize_node
-from nodes.validate import validate_node
-from nodes.report import report_node
+# Import node functions directly since parent directory is in sys.path
+from search_node import search_node
+from summarize_node import summarize_node
+from validate_node import validate_node
+from report_node import report_node
 
 # 5. Build simple error_handler_node inline
 def error_handler_node(state: AgentState) -> AgentState:

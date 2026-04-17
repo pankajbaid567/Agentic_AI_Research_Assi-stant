@@ -56,12 +56,13 @@ Do not include any text outside the JSON. No markdown. No explanation."""
             first_summ = validated_summaries[0]
             first_summary_text = first_summ.get("summary", str(first_summ)) if isinstance(first_summ, dict) else str(first_summ)
             
-        abstract = f"Based on {num_sources_len} sources about {query}. {first_summary_text}"
+        import textwrap
+        abstract = textwrap.shorten(f"Based on {num_sources_len} sources about {query}. {first_summary_text}", width=250, placeholder="...")
         
         key_findings = []
         for s in validated_summaries[:5]:
             s_text = s.get("summary", str(s)) if isinstance(s, dict) else str(s)
-            key_findings.append(s_text[:150])
+            key_findings.append(textwrap.shorten(s_text, width=150, placeholder="..."))
             
         conclusion = f"Further research is recommended on the topic of {query}."
         

@@ -5,7 +5,6 @@ except ImportError:
     AgentState = Any
 
 from agent.llm_utils import call_llm_with_fallback
-from milestone1.summarizer import ExtractiveSummarizer
 
 def summarize_node(state: AgentState) -> AgentState:
     # Initialize lists in state if they don't exist
@@ -29,9 +28,13 @@ def summarize_node(state: AgentState) -> AgentState:
             summary_text, llm_used = call_llm_with_fallback(prompt)
             
             if not summary_text:
-                summarizer = ExtractiveSummarizer()
-                # Assuming ExtractiveSummarizer has a .summarize() method
-                summary_text = summarizer.summarize(truncated_content)
+                try:
+                    from milestone1.summarizer import ExtractiveSummarizer
+                    summarizer = ExtractiveSummarizer()
+                    summary_text = summarizer.summarize(truncated_content)
+                except ImportError:
+                    import textwrap
+                    summary_text = textwrap.shorten(truncated_content, width=300, placeholder="...")
             
             # Append summary dict
             state["summaries"].append({

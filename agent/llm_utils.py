@@ -1,6 +1,7 @@
 import os
 import json
 import re
+from typing import Optional, Tuple
 from dotenv import load_dotenv
 from huggingface_hub import InferenceClient
 from langchain_community.llms import Ollama
@@ -31,7 +32,7 @@ def call_ollama(prompt: str, model: str = "llama3.2") -> str:
         print(f"Error in call_ollama: {e}")
         raise
 
-def call_llm_with_fallback(prompt: str) -> tuple[str, str]:
+def call_llm_with_fallback(prompt: str) -> Tuple[str, str]:
     try:
         response_text = call_hf_inference(prompt)
         return response_text, "hf_inference"
@@ -44,7 +45,7 @@ def call_llm_with_fallback(prompt: str) -> tuple[str, str]:
             print(f"Ollama fallback failed: {e2}")
             return "", "extractive_fallback"
 
-def safe_parse_json(text: str) -> dict | None:
+def safe_parse_json(text: str) -> Optional[dict]:
     try:
         # Strip markdown code fences (```json ... ```)
         pattern = r"```(?:json)?\s*(.*?)\s*```"
