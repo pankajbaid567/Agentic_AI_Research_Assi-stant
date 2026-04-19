@@ -1,0 +1,32 @@
+/* Appended when user selects Light — overrides premium.css variables */
+:root {
+  --ra-bg0: #f4f6fb;
+  --ra-bg1: #e8ecf4;
+  --ra-surface: rgba(255, 255, 255, 0.82);
+  --ra-surface-2: rgba(255, 255, 255, 0.94);
+  --ra-glass-border: rgba(15, 23, 42, 0.08);
+  --ra-text: #0f172a;
+  --ra-text-muted: #475569;
+  --ra-accent: #0d9488;
+  --ra-accent-soft: rgba(13, 148, 136, 0.12);
+  --ra-glow: rgba(13, 148, 136, 0.2);
+  --ra-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+  --ra-shadow-sm: 0 4px 20px rgba(15, 23, 42, 0.06);
+}
+
+.stApp,
+section[data-testid="stSidebar"] > div {
+  color: var(--ra-text) !important;
+}
+
+.ra-hero h1 {
+  background: linear-gradient(
+    120deg,
+    #0f172a 0%,
+    #334155 45%,
+    #0d9488 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
